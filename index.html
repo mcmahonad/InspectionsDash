@@ -1,0 +1,83 @@
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+      <title>EE 2022 Stormwater Inspections</title>
+
+      <!-- arcgis js api and calcite components-->
+      <script src="https://js.arcgis.com/calcite-components/1.0.0-beta.73/calcite.esm.js" type="module"></script>
+      <script src="https://js.arcgis.com/4.22/"></script>
+      
+      <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.0.0-beta.73/calcite.css" />
+      <link rel="stylesheet" href="https://js.arcgis.com/4.22/@arcgis/core/assets/esri/themes/dark/main.css" />
+
+      <!-- local-->
+      <script src="./main.js"></script>
+      <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+
+  <calcite-shell content-behind>
+    <h1 id="header-title" slot="header">
+        2022 Stormwater Infrastructure Inspections
+    </h1>
+
+    <calcite-panel id="resultPanel">
+      <nav> Select assets
+        <calcite-dropdown>
+          <calcite-button slot="dropdown-trigger" color="neutral" appearance="outline">Calendar</calcite-button>
+            <calcite-date-picker scale="m" active="true" range="true"></calcite-date-picker>
+        </calcite-dropdown>
+
+        <calcite-dropdown>
+          <calcite-button slot="dropdown-trigger" color="neutral" appearance="outline">Date range</calcite-button>
+          <calcite-button id="query2015" class="queryButtons" color="neutral" appearance="outline">
+            Select all assets built after 2015
+          </calcite-button>
+          <calcite-button id="query2016" class="queryButtons" color="neutral" appearance="outline">
+            Select all assets built after 2016
+          </calcite-button>
+          <calcite-button id="query2017" class="queryButtons" color="neutral" appearance="outline">
+            Select all assets built after 2017
+          </calcite-button>
+          <calcite-button id="query2018" class="queryButtons" color="neutral" appearance="outline">
+            Select all assets built after 2018
+          </calcite-button>
+          <!-- add a test non calcite button-->
+          <button class="queryButtons" id="testButton">
+            This is a test button
+          </button>
+          <!-- end of tests-->
+        </calcite-dropdown>
+      </nav>
+
+      <calcite-panel class="assetPanel"> 
+        <div class="assetCount" id="countyAssetCount">
+          <h1 class="assetCountText" id="countyAssetCountText">
+            xxx
+          </h1>
+          <div class="assetDescriptor" id="countyAssetDescriptor">
+            <h2>County Assets Inspected</h2>
+          </div>
+        </div>
+      </calcite-panel>
+
+      <calcite-panel class="assetPanel">
+        <div class="assetCount" id="newAssetCount">
+          <h1 class="assetCountText" id="countyAssetCountText">
+            xxx
+          </h1>
+          <div class="assetDescriptor" id="newAssetDescriptor">
+            <h2>New Assets Inspected</h2>
+          </div>
+        </div>
+      </calcite-panel>
+    </calcite-panel>
+
+    <div id="viewDiv"></div>
+
+  </calcite-shell>
+
+
+</body>

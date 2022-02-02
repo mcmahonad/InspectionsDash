@@ -1,0 +1,46 @@
+html, body{
+    height: 100%;
+}
+
+calcite-button{
+    --calcite-ui-foreground-1:#2B2B2B;
+    --calcite-ui-text-1:#ffffff;
+}
+
+calcite-panel {
+    --calcite-ui-background: #2B2B2B;
+    --calcite-ui-text-1: #8c8a92;
+    text-align: center;
+    padding: top 100px;
+}
+
+calcite-shell {
+    --calcite-ui-foreground-1: #2B2B2B;
+    --calcite-ui-text-2: #ffffff;
+}
+
+#dateDropdown{
+    width: 100%;
+}
+
+#header-title{
+    padding-left: 20%;
+    align: "center";
+}
+
+#resultPanel {
+    padding: 2px;
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+#viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 75%;
+
+}

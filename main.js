@@ -10,8 +10,8 @@ require([
 
 function(config, Map, MapView, BasemapGallery, Expand, Legend, FeatureLayer){
   // Paste key and portal here
-  config.apiKey = "AAPK783bec73d15548ffb9a0b748881d221b0NHAWZjTkHSiETAc5Tf2--KyrQRq_eC9NGV7VzCLw_ZZHk3zR9IuK4b9Unz_cnLR"//Paste Key here
-  config.PortalUrl = "https://chesterfieldva.maps.arcgis.com/" //Paste portal url here
+  config.apiKey = ""//Paste Key here
+  config.PortalUrl = "" //Paste portal url here
 
   const map = new Map({
     basemap: "arcgis-topographic"

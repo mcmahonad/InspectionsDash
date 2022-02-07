@@ -19,6 +19,7 @@
   <body>
 
   <calcite-shell content-behind>
+    
     <h1 id="header-title" slot="header">
         2022 Stormwater Infrastructure Inspections
     </h1>
@@ -33,16 +34,16 @@
         <calcite-dropdown>
           <calcite-button slot="dropdown-trigger" color="neutral" appearance="outline">Date range</calcite-button>
           <calcite-button id="query2015" class="queryButtons" color="neutral" appearance="outline">
-            Select all assets built after 2015
+            2015
           </calcite-button>
           <calcite-button id="query2016" class="queryButtons" color="neutral" appearance="outline">
-            Select all assets built after 2016
+            2016
           </calcite-button>
           <calcite-button id="query2017" class="queryButtons" color="neutral" appearance="outline">
-            Select all assets built after 2017
+            2017
           </calcite-button>
           <calcite-button id="query2018" class="queryButtons" color="neutral" appearance="outline">
-            Select all assets built after 2018
+            2018
           </calcite-button>
           <!-- add a test non calcite button-->
           <button class="queryButtons" id="testButton">
@@ -65,7 +66,7 @@
 
       <calcite-panel class="assetPanel">
         <div class="assetCount" id="newAssetCount">
-          <h1 class="assetCountText" id="countyAssetCountText">
+          <h1 class="assetCountText" id="newAssetCountText">
             xxx
           </h1>
           <div class="assetDescriptor" id="newAssetDescriptor">
@@ -78,6 +79,5 @@
     <div id="viewDiv"></div>
 
   </calcite-shell>
-
 
 </body>

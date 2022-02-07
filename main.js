@@ -5,20 +5,21 @@ require([
     "esri/widgets/BasemapGallery",
     "esri/widgets/Expand",
     "esri/widgets/Legend",
-    "esri/layers/FeatureLayer",
+    "esri/layers/FeatureLayer"
 ],
 
 function(config, Map, MapView, BasemapGallery, Expand, Legend, FeatureLayer){
-  config.apiKey = ""//Paste Key here
-  config.PortalUrl = "" //Paste portal url here
-  
+  // Paste key and portal here
+  config.apiKey = "AAPK783bec73d15548ffb9a0b748881d221b0NHAWZjTkHSiETAc5Tf2--KyrQRq_eC9NGV7VzCLw_ZZHk3zR9IuK4b9Unz_cnLR"//Paste Key here
+  config.PortalUrl = "https://chesterfieldva.maps.arcgis.com/" //Paste portal url here
+
   const map = new Map({
     basemap: "arcgis-topographic"
   });
 
   const view = new MapView({
       map: map,
-      zoom:11,
+      zoom: 11,
       container: "viewDiv",
       padding: {
           right: 50
@@ -35,7 +36,7 @@ function(config, Map, MapView, BasemapGallery, Expand, Legend, FeatureLayer){
 
   const legend = new Legend({
     view: view,
-    container: document.createElement("div"),
+    container: document.createElement("div")
   });
 
   const galleryExpand = new Expand({
@@ -50,7 +51,7 @@ function(config, Map, MapView, BasemapGallery, Expand, Legend, FeatureLayer){
 
   const swData = new FeatureLayer({
     // sample public dataset. Swap out for inspections data once authentication is figured out.
-    url: "https://services3.arcgis.com/TsynfzBSE6sXfoLq/arcgis/rest/services/Stormwater/FeatureServer/2",
+    url: "https://services3.arcgis.com/TsynfzBSE6sXfoLq/arcgis/rest/services/Stormwater/FeatureServer/2"
   });
 
  swData
@@ -63,29 +64,42 @@ function(config, Map, MapView, BasemapGallery, Expand, Legend, FeatureLayer){
 
   map.add(swData);
   view.ui.add(galleryExpand, "bottom-left");
-  view.ui.add(legendExpand, "bottom-left")
+  view.ui.add(legendExpand, "bottom-left");
 
+  // highlight persists outside of layerView
+  let highlight;
 
-// query function working. Update where clause to use button yearinstalled and get target button year.
+  // create a layer view from feature layer once it's loaded. Can't highlight a feature layer.
+  view.whenLayerView(swData).then(function(swLayer){
+    // I probably shouldn't ask Brianna for function names anymore. Potato fired on click
+    function potato(evt){
+    const clickQuery = swData.createQuery();
+    clickQuery.where = `YearInstalled='${evt.target.innerText}'`; // using arcade expression.
+    clickQuery.returnGeometry = true;
 
-// I probably shouldn't ask Brianna for function names anymore. 
-function potato(){
-const anotherQuery = swData.createQuery();
-anotherQuery.where = "YearInstalled = '2015'", // needs to use target button year
-anotherQuery.returnGeometry = true
+    // update panel text
+    swData.queryFeatures(clickQuery)
+      .then((results) => {
+        let dispText = document.querySelector("#newAssetCountText");
+        dispText.innerHTML = results.features.length;
+        console.log(results.features.length + " assets installed in 2015");
 
-swData.queryFeatures(anotherQuery)
-  .then((results) => {
-    let dispText = document.querySelector("#countyAssetCountText");
-    dispText.innerHTML = results.features.length;
-    console.log(results.features.length + " assets installed in 2015");
+        // zoom to query results
+        view.goTo({
+          target: results.features
+        });
+
+        // highlight query results
+        if(highlight){
+          highlight.remove();
+        }
+      highlight = swLayer.highlight(results.features);
+      });
+    }
+    // apply potato to buttons. 
+    const buttons = document.querySelectorAll(".queryButtons");
+    buttons.forEach(but => {
+      but.addEventListener("click", potato);
+    });
   });
-};
-
-const buttons = document.querySelectorAll(".queryButtons");
-buttons.forEach(but => {
-  but.addEventListener("click", potato);
 });
-
-}); 
-
